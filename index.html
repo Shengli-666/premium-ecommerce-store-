@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Products | Global Store</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">🏹</span>
+        <span class="logo-text">PREMIUM STORE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/" class="active">Home</a></li>
+        <li><a href="/products">Products</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/login" class="btn btn-outline">Login</a>
+        <a href="/register" class="btn btn-primary">Sign Up</a>
+      </div>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-background"></div>
+    <div class="container hero-content">
+      <h1 class="hero-title">Premium Quality Products<br>For Global Customers</h1>
+      <p class="hero-subtitle">Discover our curated collection designed for customers in USA, Brazil, and Australia</p>
+      <div class="hero-cta">
+        <a href="/products" class="btn btn-primary btn-lg">Shop Now</a>
+        <a href="#featured" class="btn btn-outline btn-lg">View Collection</a>
+      </div>
+      <div class="hero-features">
+        <div class="feature">
+          <span class="feature-icon">🚚</span>
+          <span>Free Shipping</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">✓</span>
+          <span>Quality Guaranteed</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">💬</span>
+          <span>24/7 Support</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section id="featured" class="section products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-subtitle">Handpicked favorites from our collection</p>
+      </div>
+      <div class="products-grid" id="featured-products">
+        <!-- Products will be loaded dynamically -->
+        <div class="product-card skeleton">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info-placeholder"></div>
+        </div>
+        <div class="product-card skeleton">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info-placeholder"></div>
+        </div>
+        <div class="product-card skeleton">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info-placeholder"></div>
+        </div>
+        <div class="product-card skeleton">
+          <div class="product-image-placeholder"></div>
+          <div class="product-info-placeholder"></div>
+        </div>
+      </div>
+      <div class="section-cta">
+        <a href="/products" class="btn btn-primary">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Scenes -->
+  <section class="section scenes-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">See It In Action</h2>
+        <p class="section-subtitle">Real-life scenarios showing how our products enhance your daily life</p>
+      </div>
+      <div class="scenes-grid">
+        <div class="scene-card">
+          <div class="scene-media">
+            <div class="scene-placeholder">🏠</div>
+          </div>
+          <div class="scene-content">
+            <h3>Home Use</h3>
+            <p>Perfect for everyday home activities</p>
+          </div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-media">
+            <div class="scene-placeholder">💼</div>
+          </div>
+          <div class="scene-content">
+            <h3>Professional</h3>
+            <p>Boost your productivity at work</p>
+          </div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-media">
+            <div class="scene-placeholder">🎯</div>
+          </div>
+          <div class="scene-content">
+            <h3>Outdoor</h3>
+            <p>Designed for active lifestyles</p>
+          </div>
+        </div>
+        <div class="scene-card">
+          <div class="scene-media">
+            <div class="scene-placeholder">👨‍👩‍👧‍👦</div>
+          </div>
+          <div class="scene-content">
+            <h3>Family</h3>
+            <p>Safe and convenient for everyone</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Badges -->
+  <section class="section trust-section">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item">
+          <span class="trust-icon">🌎</span>
+          <h4>Worldwide Shipping</h4>
+          <p>Fast delivery to USA, Brazil, Australia and more</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">🔒</span>
+          <h4>Secure Payment</h4>
+          <p>Your transactions are always protected</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">⭐</span>
+          <h4>5-Star Reviews</h4>
+          <p>Trusted by thousands of happy customers</p>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">💬</span>
+          <h4>WhatsApp Support</h4>
+          <p>Instant customer service via WhatsApp</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact-section">
+    <div class="container">
+      <div class="contact-content">
+        <div class="contact-info">
+          <h2>Get In Touch</h2>
+          <p>Have questions? We're here to help!</p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <span class="contact-icon">📧</span>
+              <div>
+                <strong>Email</strong>
+                <p>support@premiumstore.com</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <span class="contact-icon">💬</span>
+              <div>
+                <strong>WhatsApp</strong>
+                <p>+1 (555) 123-4567</p>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/15551234567" class="btn btn-whatsapp" target="_blank">
+            Chat on WhatsApp
+          </a>
+        </div>
+        <div class="contact-form-wrapper">
+          <form class="contact-form" id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Premium Store</h4>
+          <p>Quality products for global customers</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" class="social-link">📘</a>
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🐦</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Premium Store. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/15551234567" class="whatsapp-float" target="_blank">
+    <span>💬</span>
+  </a>
+
+  <script src="../js/main.js"></script>
+  <script>
+    // Load featured products
+    async function loadFeaturedProducts() {
+      try {
+        const response = await fetch('/api/products/featured/homepage');
+        const data = await response.json();
+        
+        const container = document.getElementById('featured-products');
+        if (data.products && data.products.length > 0) {
+          container.innerHTML = data.products.map(product => `
+            <div class="product-card">
+              <div class="product-image">
+                <img src="${product.images?.[0]?.url || 'https://via.placeholder.com/300x300'}" alt="${product.name}">
+                ${product.comparePrice ? `<span class="product-badge">Sale</span>` : ''}
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-price">
+                  $${product.price.toFixed(2)}
+                  ${product.comparePrice ? `<span class="price-compare">$${product.comparePrice.toFixed(2)}</span>` : ''}
+                </p>
+                <a href="/product/${product._id}" class="btn btn-outline btn-sm">View Details</a>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      }
+    }
+    
+    loadFeaturedProducts();
+  </script>
+</body>
+</html>
