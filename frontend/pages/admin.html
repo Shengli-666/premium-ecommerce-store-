@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Premium Store</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+  <!-- Admin Sidebar -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">
+      <span class="logo-icon">🏹</span>
+      <span class="logo-text">ADMIN</span>
+    </div>
+    <nav class="admin-nav">
+      <a href="#dashboard" class="admin-nav-item active" onclick="showSection('dashboard')">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="#customers" class="admin-nav-item" onclick="showSection('customers')">
+        <span class="nav-icon">👥</span>
+        <span>Customers</span>
+      </a>
+      <a href="#products" class="admin-nav-item" onclick="showSection('products')">
+        <span class="nav-icon">📦</span>
+        <span>Products</span>
+      </a>
+      <a href="#orders" class="admin-nav-item" onclick="showSection('orders')">
+        <span class="nav-icon">🛒</span>
+        <span>Orders</span>
+      </a>
+      <a href="#settings" class="admin-nav-item" onclick="showSection('settings')">
+        <span class="nav-icon">⚙️</span>
+        <span>Settings</span>
+      </a>
+    </nav>
+    <div class="admin-logout">
+      <a href="/" class="btn btn-outline btn-sm">← Back to Site</a>
+      <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+    </div>
+  </aside>
+
+  <!-- Admin Main Content -->
+  <main class="admin-main">
+    <!-- Header -->
+    <header class="admin-header">
+      <h1 id="page-title">Dashboard</h1>
+      <div class="admin-user">
+        <span id="admin-name">Admin</span>
+        <span class="admin-avatar">👤</span>
+      </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard-section" class="admin-section active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-content">
+            <h3 id="total-customers">-</h3>
+            <p>Total Customers</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🌎</div>
+          <div class="stat-content">
+            <h3 id="active-customers">-</h3>
+            <p>Active Customers</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-content">
+            <h3 id="total-products">-</h3>
+            <p>Total Products</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">💬</div>
+          <div class="stat-content">
+            <h3>WhatsApp</h3>
+            <p>Support Available</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-grid">
+        <div class="admin-card">
+          <h3>Customers by Country</h3>
+          <div id="customers-by-country" class="chart-container">
+            <!-- Chart will be rendered -->
+          </div>
+        </div>
+        <div class="admin-card">
+          <h3>Recent Customers</h3>
+          <div id="recent-customers" class="list-container">
+            <!-- List will be rendered -->
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h3>WhatsApp Quick Actions</h3>
+        <div class="quick-actions">
+          <a href="https://wa.me/15551234567" target="_blank" class="btn btn-whatsapp">
+            💬 Open WhatsApp
+          </a>
+          <button class="btn btn-outline" onclick="copyWhatsAppLink()">
+            📋 Copy Link
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Customers Section -->
+    <section id="customers-section" class="admin-section">
+      <div class="admin-toolbar">
+        <input type="text" id="customer-search" placeholder="Search customers..." class="search-input">
+        <select id="country-filter" class="filter-select">
+          <option value="">All Countries</option>
+          <option value="US">United States</option>
+          <option value="BR">Brazil</option>
+          <option value="AU">Australia</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Country</th>
+              <th>WhatsApp</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="customers-table-body">
+            <!-- Rows will be rendered -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products-section" class="admin-section">
+      <div class="admin-toolbar">
+        <button class="btn btn-primary" onclick="showAddProductModal()">+ Add Product</button>
+      </div>
+      <div class="products-grid" id="admin-products-grid">
+        <!-- Products will be rendered -->
+      </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section id="orders-section" class="admin-section">
+      <div class="admin-card">
+        <h3>Orders Management</h3>
+        <p>Order management features coming soon...</p>
+      </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings-section" class="admin-section">
+      <div class="admin-card">
+        <h3>WhatsApp Configuration</h3>
+        <div class="form-group">
+          <label for="whatsapp-number">WhatsApp Business Number</label>
+          <input type="text" id="whatsapp-number" value="+1 (555) 123-4567" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="whatsapp-message">Default Message Template</label>
+          <textarea id="whatsapp-message" class="form-control" rows="3">Hello! I'm interested in your products. Can you help me?</textarea>
+        </div>
+        <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

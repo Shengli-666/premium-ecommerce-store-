@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products | Premium Store</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="/" class="logo">
+        <span class="logo-icon">🏹</span>
+        <span class="logo-text">PREMIUM STORE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/products" class="active">Products</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/login" class="btn btn-outline">Login</a>
+        <a href="/register" class="btn btn-primary">Sign Up</a>
+      </div>
+      <button class="mobile-menu-btn">☰</button>
+    </div>
+  </nav>
+
+  <!-- Products Header -->
+  <section class="page-header">
+    <div class="container">
+      <h1>Our Products</h1>
+      <p>Explore our complete collection of premium products</p>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="section products-page">
+    <div class="container">
+      <div class="products-layout">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+          <div class="filter-group">
+            <h3>Categories</h3>
+            <div class="filter-options" id="category-filters">
+              <label class="filter-option">
+                <input type="checkbox" value="all" checked>
+                <span>All Products</span>
+              </label>
+            </div>
+          </div>
+          <div class="filter-group">
+            <h3>Price Range</h3>
+            <div class="price-range">
+              <input type="number" id="min-price" placeholder="Min" min="0">
+              <span>-</span>
+              <input type="number" id="max-price" placeholder="Max" min="0">
+            </div>
+          </div>
+          <button class="btn btn-outline btn-block" onclick="applyFilters()">Apply Filters</button>
+        </aside>
+
+        <!-- Products Grid -->
+        <div class="products-main">
+          <div class="products-toolbar">
+            <div class="products-count" id="products-count">Loading...</div>
+            <select class="sort-select" id="sort-select">
+              <option value="newest">Newest First</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+            </select>
+          </div>
+          <div class="products-grid" id="products-grid">
+            <!-- Products will be loaded dynamically -->
+          </div>
+          <div class="pagination" id="pagination">
+            <!-- Pagination will be generated -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Premium Store. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/15551234567" class="whatsapp-float" target="_blank">
+    <span>💬</span>
+  </a>
+
+  <script src="../js/main.js"></script>
+  <script>
+    let currentPage = 1;
+    let currentCategory = 'all';
+
+    async function loadProducts(page = 1, category = 'all') {
+      try {
+        const url = category === 'all' 
+          ? `/api/products?limit=12&page=${page}`
+          : `/api/products?category=${category}&limit=12&page=${page}`;
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        const container = document.getElementById('products-grid');
+        const countEl = document.getElementById('products-count');
+        
+        if (data.products && data.products.length > 0) {
+          countEl.textContent = `Showing ${data.products.length} of ${data.pagination.totalItems} products`;
+          
+          container.innerHTML = data.products.map(product => `
+            <div class="product-card">
+              <div class="product-image">
+                <img src="${product.images?.[0]?.url || 'https://via.placeholder.com/300x300'}" alt="${product.name}">
+                ${product.comparePrice ? `<span class="product-badge">Sale</span>` : ''}
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-description">${product.shortDescription || ''}</p>
+                <p class="product-price">
+                  $${product.price.toFixed(2)}
+                  ${product.comparePrice ? `<span class="price-compare">$${product.comparePrice.toFixed(2)}</span>` : ''}
+                </p>
+                <a href="/product/${product._id}" class="btn btn-primary btn-block">View Details</a>
+              </div>
+            </div>
+          `).join('');
+          
+          // Update pagination
+          updatePagination(data.pagination);
+        } else {
+          container.innerHTML = '<div class="no-products"><p>No products found</p></div>';
+          countEl.textContent = '0 products';
+        }
+      } catch (error) {
+        console.error('Failed to load products:', error);
+      }
+    }
+
+    function updatePagination(pagination) {
+      const container = document.getElementById('pagination');
+      if (pagination.total <= 1) {
+        container.innerHTML = '';
+        return;
+      }
+      
+      let html = '';
+      for (let i = 1; i <= pagination.total; i++) {
+        html += `<button class="page-btn ${i === pagination.current ? 'active' : ''}" onclick="loadProducts(${i}, '${currentCategory}')">${i}</button>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function applyFilters() {
+      const category = document.querySelector('#category-filters input:checked')?.value || 'all';
+      currentCategory = category;
+      currentPage = 1;
+      loadProducts(1, category);
+    }
+
+    // Load categories
+    async function loadCategories() {
+      try {
+        const response = await fetch('/api/products?limit=100');
+        const data = await response.json();
+        
+        const categories = [...new Set(data.products.map(p => p.category))];
+        const container = document.getElementById('category-filters');
+        
+        container.innerHTML = `
+          <label class="filter-option">
+            <input type="checkbox" name="category" value="all" ${currentCategory === 'all' ? 'checked' : ''}>
+            <span>All Products</span>
+          </label>
+          ${categories.map(cat => `
+            <label class="filter-option">
+              <input type="checkbox" name="category" value="${cat}">
+              <span>${cat}</span>
+            </label>
+          `).join('')}
+        `;
+      } catch (error) {
+        console.error('Failed to load categories:', error);
+      }
+    }
+
+    // Initialize
+    loadProducts();
+    loadCategories();
+  </script>
+</body>
+</html>

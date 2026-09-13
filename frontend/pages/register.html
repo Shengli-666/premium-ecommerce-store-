@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Premium Store</title>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="/" class="logo">
+          <span class="logo-icon">🏹</span>
+          <span class="logo-text">PREMIUM STORE</span>
+        </a>
+        <h1>Create Account</h1>
+        <p>Join our global community</p>
+      </div>
+
+      <form class="auth-form" id="register-form">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required placeholder="••••••••" minlength="6">
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country</label>
+          <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="US">United States</option>
+            <option value="BR">Brazil</option>
+            <option value="AU">Australia</option>
+            <option value="OTHER">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number (optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+        </div>
+
+        <div class="form-group">
+          <label for="whatsapp">WhatsApp Number (for support)</label>
+          <input type="tel" id="whatsapp" name="whatsapp" placeholder="+1 (555) 123-4567">
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="terms" required>
+            <span>I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a></span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account? <a href="/login" class="link">Sign in</a>
+      </p>
+    </div>
+
+    <div class="auth-side">
+      <div class="auth-side-content">
+        <h2>Why Join Us?</h2>
+        <ul class="auth-benefits">
+          <li>🌎 Shop globally with ease</li>
+          <li>💬 Direct WhatsApp support</li>
+          <li>🎁 Member-exclusive deals</li>
+          <li>📦 Fast & tracked shipping</li>
+          <li>🔒 Secure payments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/main.js"></script>
+  <script>
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        country: document.getElementById('country').value,
+        phone: document.getElementById('phone').value,
+        whatsapp: document.getElementById('whatsapp').value
+      };
+      
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          alert('Account created successfully!');
+          window.location.href = '/';
+        } else {
+          alert(data.message || 'Registration failed');
+        }
+      } catch (error) {
+        console.error('Register error:', error);
+        alert('Registration failed. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>
