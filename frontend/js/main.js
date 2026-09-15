@@ -7,14 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const navActions = document.querySelector('.nav-actions');
   
   if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-      const isMobile = window.innerWidth <= 768;
-      if (isMobile) {
-        // Simple mobile menu toggle for now
-        alert('Mobile menu - implement full toggle in production');
-      }
-    });
-  }
   
   // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
