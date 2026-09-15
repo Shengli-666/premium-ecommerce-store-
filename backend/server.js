@@ -86,6 +86,10 @@ app.use('/api/customers', customerRoutes(db));
 app.get('/', (req, res) => {  
 res.sendFile(path.join(__dirname, '../frontend/pages/index.html'));  
 });  
+
+app.get('/product/:id', (req, res) => {  
+res.sendFile(path.join(__dirname, '../frontend/pages/product-detail.html'));  
+});  
   
 app.get('/admin', (req, res) => {  
 res.sendFile(path.join(__dirname, '../frontend/pages/admin.html'));  
